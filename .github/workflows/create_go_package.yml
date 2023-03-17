@@ -1,7 +1,7 @@
 name: Create Go Package
 
 on:
-  workflow_call:
+  workflow_dispatch:
 
 jobs:
   create_go_package_and_push:
