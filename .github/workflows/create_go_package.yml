@@ -26,8 +26,8 @@ jobs:
 
       - name: Create new branch from main
         run: |
-          git checkout -b feature/go-pr_${{ github.event.pull_request.number }}-${{ github.event.created_at }}
-          git push -u origin feature/go-pr_${{ github.event.pull_request.number }}-${{ github.event.created_at }}
+          git checkout -b feature/go-pr-${{ github.event.created_at }}
+          git push -u origin feature/go-pr-${{ github.event.created_at }}
 
       - name: Move zip Go file to workspace
         run: |
@@ -36,7 +36,7 @@ jobs:
       - name: Push zip Go file to new branch
         run: |
           git add go.zip
-          git commit -m "Added new Go package: '${{ github.event.pull_request.title }}'"
+          git commit -m "Added new Go package"
           git push
 
       - name: Create Pull Request
@@ -45,8 +45,8 @@ jobs:
             commit-message: Update Go Package
             title: ${{ github.event.pull_request.title }}
             body: ${{ github.event.pull_request.body }}
-            base: main
-            branch: feature/go-pr_${{ github.event.pull_request.number }}-${{ github.event.created_at }}
-            delete-branch: true
+            base: packages
+            branch: feature/go-pr-${{ github.event.created_at }}
+            delete-branch: false
 
 
